@@ -1836,7 +1836,7 @@ void setup() {
     html +="var timedEvent = setInterval(function(){ loadDoc(); }, 200);";
     html +="</script>";
     html +="</body> </html>";
-    server.send(200, "text/plain", html);
+    server.send(200, "text/html", html);
   });
   server.on("/take_wf", ambil_wifi); server.on("/send_wf", HTTP_OPTIONS, disp_option);
   server.on("/take_txt_prop", ambil_txt_prop); server.on("/send_txt_prop", HTTP_OPTIONS, disp_option); server.on("/send_txt_prop", HTTP_POST, set_txt_prop);
