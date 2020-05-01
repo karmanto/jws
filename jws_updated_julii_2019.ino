@@ -55,6 +55,42 @@ const int lat = 0;
 const int relay = 15;
 const int buzz = 2;
 const int manual_iqm = 13;
+uint8_t sensor_value = 0;
+
+String html ="<!DOCTYPE html>";
+html +="<style>";
+html +="html {height: 100%; background: radial-gradient(rgb(50,50,50), rgb(40,40,40), rgb(20,20,20));}";
+html +="h1 {display: block; margin:auto; font-family: Arial ; font-weight: bold; font-size: 2000%;color: white; text-align: center; position: relative;margin-top:0px;}";
+html +="p1 {display: block; margin:auto; font-family: Arial ; font-weight: bold; font-size: 2500%;color: white; text-align: center; position: relative; margin-top:30px;}";
+html +="button {display: block; margin:auto;height: 400px; width: 400px; font-family: Arial ;font-size: 800%; font-weight: bold; border-radius: 50%; outline-style: none; position:relative; margin-top:150 px; }";
+html +="#dataVals { max-width: 400px; display: block; margin-top: 30px; }";
+html +="</style>";
+html +="</head>";
+html +="<body>";
+html +="<h1>Counter_value</h1>";
+html +="<p1 id=\"sensor_value\"></p1>";
+html +="<button onclick=zero()> Zero </button>";
+html +="<script>";
+html +="var changed = false;";
+html +="function loadDoc() {";
+html +="    var xhttp = new XMLHttpRequest();";
+html +="    xhttp.onreadystatechange = function() {";
+html +="        if (this.readyState == 4 && this.status == 200) {";
+html +="        var obj = JSON.parse(this.responseText);";
+html +="        document.getElementById(\"sensor_value\").innerHTML = obj.data[0].dataValue;";
+html +="        }";
+html +="    };";
+html +="    xhttp.open(\"GET\", \"/data\", true);";
+html +="    xhttp.send();";
+html +="}";
+html +="function zero(){";
+html +=" zero = document.getElementById(\"sensor_value\").innerHTML;";
+html +="}";
+html +="}";
+html +="var timedEvent = setInterval(function(){ loadDoc(); }, 200);";
+
+html +="</script>";
+html +="</body> </html>";
 
 #define ESP8266_TIMER0_TICKS microsecondsToClockCycles(3500)
 double times[sizeof(TimeName) / sizeof(char*)];
